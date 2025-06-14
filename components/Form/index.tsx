@@ -1,51 +1,71 @@
-import * as S from "./styles";
-
 import React, { useState } from "react";
-import { Alert, Button, Text, TextInput } from "react-native";
+import { Alert, TextInput, View } from "react-native";
+import CustomButton from "../CustomButton";
+import { styles } from "./styles";
 
 export const Form = () => {
-  const [nome, setNome] = useState("");
+  const [name, setName] = useState("");
+  const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleRegistrar = () => {
-    if (!nome || !email || !senha) {
+    if (!name || !email || !password) {
       Alert.alert("Erro", "Preencha todos os campos");
       return;
     }
-    Alert.alert("Sucesso", `Registrado:\nNome: ${nome}\nEmail: ${email}`);
+    Alert.alert("Sucesso", `Registrado:\nNome: ${name}\nEmail: ${email}`);
     // Aqui você poderia enviar os dados para uma API ou salvar localmente
   };
 
   return (
-    <S.FormBody>
-      <Text>Nome:</Text>
+    <View style={styles.formBody}>
       <TextInput
-        placeholder="Digite seu nome"
-        value={nome}
-        onChangeText={setNome}
-        style={{ borderWidth: 1, padding: 8, marginBottom: 10 }}
+        placeholder="Nome"
+        value={name}
+        onChangeText={setName}
+        style={styles.formInput}
+        placeholderTextColor="#A5ACAF"
       />
 
-      <Text>Email:</Text>
       <TextInput
-        placeholder="Digite seu email"
+        placeholder="Usuario"
+        value={user}
+        onChangeText={setUser}
+        keyboardType="email-address"
+        style={styles.formInput}
+        placeholderTextColor="#A5ACAF"
+      />
+
+      <TextInput
+        placeholder="Email"
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
-        style={{ borderWidth: 1, padding: 8, marginBottom: 10 }}
+        style={styles.formInput}
+        placeholderTextColor="#A5ACAF"
       />
 
-      <Text>Senha:</Text>
       <TextInput
-        placeholder="Digite sua senha"
-        value={senha}
-        onChangeText={setSenha}
+        placeholder="Senha"
+        value={password}
+        onChangeText={setPassword}
         secureTextEntry
-        style={{ borderWidth: 1, padding: 8, marginBottom: 20 }}
+        style={styles.formInput}
+        placeholderTextColor="#A5ACAF"
       />
 
-      <Button title="Registrar" onPress={handleRegistrar} />
-    </S.FormBody>
+      <TextInput
+        placeholder="Confirmar senha"
+        value={confirmPassword}
+        onChangeText={setConfirmPassword}
+        secureTextEntry
+        style={styles.formInput}
+        placeholderTextColor="#A5ACAF"
+      />
+
+      <CustomButton title="Registrar-se" onClick={handleRegistrar} />
+    </View>
   );
 };
