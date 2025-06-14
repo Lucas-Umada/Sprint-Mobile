@@ -1,11 +1,19 @@
-import * as S from './styles';
+import { Image, Text, View } from "react-native";
+import { styles } from "./styles";
+import { IHeader } from "./types";
 
-export const Header = () => {
+export const Header = ({ subtitle }: IHeader) => {
   return (
-    <S.HeaderContainer>
-      <S.HeaderTitle>MatchInvest</S.HeaderTitle>
+    <View style={styles.headerView}>
+      <View style={styles.headerContainer}>
+        <Text style={styles.headerTitle}>MatchInvest</Text>
+        <Image
+          style={styles.headerImage}
+          source={require("../../assets/images/income-amico.png")}
+        />
+      </View>
 
-      <S.HeaderSubtitle>Registre-se para comecar sua jornada de investimentos!</S.HeaderSubtitle>
-    </S.HeaderContainer>
-  )
-}
+      <Text style={styles.headerSubtitle}>{subtitle}</Text>
+    </View>
+  );
+};
